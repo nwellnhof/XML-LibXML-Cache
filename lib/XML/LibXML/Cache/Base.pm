@@ -50,7 +50,7 @@ sub _cache_read {
 
     my ($item, $deps) = @$cache_rec;
 
-    # check mtimes of deps_found
+    # check sizes and mtimes of deps_found
 
     while (my ($path, $attrs) = each(%$deps)) {
         my @stat = stat($path);
@@ -114,7 +114,7 @@ __END__
 
 =head1 DESCRIPTION
 
-=head1 SYNOPSIS
+Base class for the document and stylesheet caches.
 
 =cut
 
