@@ -1,7 +1,7 @@
 package XML::LibXSLT::Cache;
 use strict;
 
-# ABSTRACT: Stylesheet cache for XML::LibXSLT
+# ABSTRACT: Style sheet cache for XML::LibXSLT
 
 use base qw(XML::LibXML::Cache::Base);
 
@@ -41,14 +41,14 @@ __END__
 
 =head1 DESCRIPTION
 
-XML::LibXSLT::Cache is a cache for XML::LibXSLT stylesheets loaded from
-files. It is useful to speed up loading of XSLT stylesheets in persistent web
+XML::LibXSLT::Cache is a cache for L<XML::LibXSLT> style sheets loaded from
+files. It is useful to speed up loading of XSLT style sheets in persistent web
 applications.
 
-This module caches the stylesheet object after the first load and returns the
-cached version on subsequent loads. Stylesheets are reloaded whenever the
-stylesheet file changes. Changes to other files referenced during parsing also
-cause a reload, for example via xsl:import and xsl:include.
+This module caches the style sheet object after the first load and returns the
+cached version on subsequent loads. Style sheets are reloaded whenever the
+style sheet file changes. Changes to other files referenced during parsing also
+cause a reload, for example when using xsl:import and xsl:include.
 
 =head1 SYNOPSIS
 
@@ -69,7 +69,7 @@ Creates a new cache. Valid options are:
 
 =item xslt
 
-The XML::LibXSLT object that should be used to load stylsheets if you
+The L<XML::LibXSLT> object that should be used to load stylsheets if you
 want to reuse an existing object. If this options is missing a new
 XML::LibXSLT object will be created.
 
@@ -77,9 +77,9 @@ XML::LibXSLT object will be created.
 
 =head2 parse_stylesheet_file
 
-    my $doc = $cache->parse_stylesheet_file($filename);
+    my $stylesheet = $cache->parse_stylesheet_file($filename);
 
-Works like parse_stylesheet_file in XML::LibXSLT.
+Works like L<XML::LibXSLT/parse_stylesheet_file>.
 
 =cut
 
