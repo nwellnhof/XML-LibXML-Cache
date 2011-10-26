@@ -78,7 +78,7 @@ sub _cache_write {
 # Handling of dependencies
 
 # We register an input callback that never matches but records all URIs
-# that are accessed during parsing of the stylesheet.
+# that are accessed during parsing.
 
 sub _match_cb {
     my $uri_str = shift;
@@ -96,7 +96,7 @@ sub _match_cb {
             [ -1, -1 ];
     }
     else {
-        # The stylesheet depends on an unsupported URI
+        # Unsupported URI, disable caching
         $deps_found = undef;
     }
 
@@ -114,7 +114,7 @@ __END__
 
 =head1 DESCRIPTION
 
-Base class for the document and stylesheet caches.
+Base class for the document and style sheet caches.
 
 =cut
 
