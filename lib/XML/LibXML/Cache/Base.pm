@@ -116,5 +116,9 @@ __END__
 
 Base class for the document and style sheet caches.
 
+=head1 METHODS
+
+=head2 new
+
 =cut
 
