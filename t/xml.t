@@ -2,7 +2,7 @@
 use strict;
 
 use File::Touch;
-use Test::More tests => 7;
+use Test::More tests => 11;
 use Test::Deep;
 
 $ENV{XML_CATALOG_FILES} = '';
@@ -26,15 +26,26 @@ isa_ok($cached_rec, 'ARRAY');
 my ($cached_doc, $deps) = @$cached_rec;
 is($cached_doc, $doc, 'cached doc');
 
-my $number = re(qr/^\d+\z/);
-my $attrs = [ $number, $number ];
-cmp_deeply($deps, {
-    $filename                  => $attrs,
-    $entity_filename           => $attrs,
-    't/xml/test01.dtd'         => $attrs,
-    't/xml/test01-include.xml' => $attrs,
-    't/xml/test01-missing.xml' => [ -1, -1 ],
-}, 'dependencies');
+my $number  = re(qr/^\d+\z/);
+my $numbers = [ $number, $number ];
+
+cmp_deeply($deps->{$filename}, $numbers, 'dependency on self');
+cmp_deeply($deps->{'t/xml/test01.dtd'}, $numbers, 'dependency on dtd');
+cmp_deeply(
+    $deps->{$entity_filename},
+    $numbers,
+    'dependency on external entity',
+);
+cmp_deeply(
+    $deps->{'t/xml/test01-include.xml'},
+    $numbers,
+    'dependency on xinclude',
+);
+cmp_deeply(
+    $deps->{'t/xml/test01-missing.xml'},
+    [ -1, -1 ],
+    'dependency on missing xinclude',
+);
 
 $cached_doc = $cache->parse_file($filename);
 is(int($cached_doc), int($doc), 'cached doc');
