@@ -37,11 +37,11 @@ cmp_deeply($deps, {
 }, 'dependencies');
 
 $cached_doc = $cache->parse_file($filename);
-is($cached_doc, $doc, 'cached doc');
+is(int($cached_doc), int($doc), 'cached doc');
 
 $ref = File::Touch->new(mtime => $time, no_create => 1);
 $ref->touch($entity_filename);
 
 my $new_doc = $cache->parse_file($filename);
-isnt($new_doc, $doc, 'new doc');
+isnt(int($new_doc), int($doc), 'new doc');
 

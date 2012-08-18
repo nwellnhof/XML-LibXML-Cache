@@ -21,7 +21,7 @@ my $cached_rec = $cache->{cache}{$filename};
 isa_ok($cached_rec, 'ARRAY');
 
 my ($cached_ss, $deps) = @$cached_rec;
-is($cached_ss, $stylesheet, 'cached stylesheet');
+is(int($cached_ss), int($stylesheet), 'cached stylesheet');
 
 my $number = re(qr/^\d+\z/);
 my $attrs = [ $number, $number ];
@@ -42,5 +42,5 @@ $ref = File::Touch->new(mtime => $time, no_create => 1);
 $ref->touch($import_filename);
 
 my $new_ss = $cache->parse_stylesheet_file($filename);
-isnt($new_ss, $stylesheet, 'new stylesheet');
+isnt(int($new_ss), int($stylesheet), 'new stylesheet');
 
