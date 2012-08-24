@@ -77,7 +77,7 @@ Creates a new cache. Valid options are:
 =item parser
 
 The L<XML::LibXML> parser object that should be used to load documents if you
-want to use certain parser options. If this options is missing a parser
+want to use certain parser options. If this option is missing a parser
 with default options will be used.
 
 =back
