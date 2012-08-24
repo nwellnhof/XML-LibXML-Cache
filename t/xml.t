@@ -2,7 +2,7 @@
 use strict;
 
 use File::Touch;
-use Test::More tests => 11;
+use Test::More tests => 14;
 use Test::Deep;
 
 $ENV{XML_CATALOG_FILES} = '';
@@ -25,6 +25,9 @@ isa_ok($cached_rec, 'ARRAY');
 
 my ($cached_doc, $deps) = @$cached_rec;
 is($cached_doc, $doc, 'cached doc');
+
+my $hits = $cache->cache_hits;
+is($hits, 0, 'cache hits before');
 
 my $number  = re(qr/^\d+\z/);
 my $numbers = [ $number, $number ];
@@ -50,9 +53,15 @@ cmp_deeply(
 $cached_doc = $cache->parse_file($filename);
 is(int($cached_doc), int($doc), 'cached doc');
 
+$hits = $cache->cache_hits;
+is($hits, 1, 'cache hits after');
+
 $ref = File::Touch->new(mtime => $time, no_create => 1);
 $ref->touch($entity_filename);
 
 my $new_doc = $cache->parse_file($filename);
 isnt(int($new_doc), int($doc), 'new doc');
+
+$hits = $cache->cache_hits;
+is($hits, 1, 'cache hits after');
 

@@ -19,9 +19,18 @@ my $deps_found;
 sub new {
     my $class = shift;
 
-    my $self = { cache => {} };
+    my $self = {
+        cache => {},
+        hits  => 0,
+    };
 
     return bless($self, $class);
+}
+
+sub cache_hits {
+    my $self = shift;
+
+    return $self->{hits};
 }
 
 sub _cache_lookup {
@@ -29,7 +38,10 @@ sub _cache_lookup {
 
     my $item = $self->_cache_read($filename);
 
-    return $item if $item;
+    if ($item) {
+        ++$self->{hits};
+        return $item;
+    }
 
     $deps_found = {};
 
@@ -119,6 +131,14 @@ Base class for the document and style sheet caches.
 =head1 METHODS
 
 =head2 new
+
+Only used by subclasses.
+
+=head2 cache_hits
+
+    my $hits = $cache->cache_hits;
+
+Return the number of cache hits.
 
 =cut
 
