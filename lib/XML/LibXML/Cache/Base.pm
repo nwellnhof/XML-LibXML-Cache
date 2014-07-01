@@ -1,5 +1,6 @@
 package XML::LibXML::Cache::Base;
 use strict;
+use warnings;
 
 # ABSTRACT: Base class for XML::LibXML caches
 

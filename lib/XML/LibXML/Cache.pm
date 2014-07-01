@@ -1,5 +1,6 @@
 package XML::LibXML::Cache;
 use strict;
+use warnings;
 
 # ABSTRACT: Document cache for XML::LibXML
 

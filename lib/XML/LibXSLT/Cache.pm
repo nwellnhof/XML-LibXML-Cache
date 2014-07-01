@@ -1,5 +1,6 @@
 package XML::LibXSLT::Cache;
 use strict;
+use warnings;
 
 # ABSTRACT: Style sheet cache for XML::LibXSLT
 
