@@ -1,4 +1,5 @@
 package XML::LibXML::Cache;
+
 use strict;
 use warnings;
 
